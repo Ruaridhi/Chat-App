@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Message from './Message';
 
 export default function ChatPage() {
   return (
     <div>
       <h1>ChatPage</h1>
-      <Message />
+      <Message messages={messagesArr} />
     </div>
   );
 }
