@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '../App';
 
-export default function Massage({}) {
+export default function Message({ messages }) {
+  let user = useContext(UserContext);
+
+  console.log(user, '&&&&&&');
+
   return (
     <div>
-      <h1>Message</h1>
+      <ul>
+        {messages.map((message) => {
+          return `${user}: ${message}`;
+        })}
+      </ul>
     </div>
   );
 }
