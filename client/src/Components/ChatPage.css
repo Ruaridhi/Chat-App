@@ -1,3 +1,11 @@
 .chatPage {
   background-color: lightblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+}
+
+.textBox {
+  min-width: 300px;
 }

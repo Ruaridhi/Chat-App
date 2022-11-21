@@ -10,7 +10,7 @@ export default function Message({ messages }) {
   return (
     <div>
       {user ? (
-        <ul className="test">
+        <ul className="allMessages">
           {messages.map((message) => {
             return (
               <li

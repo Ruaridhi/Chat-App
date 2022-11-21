@@ -1,17 +1,22 @@
 .userMessages {
-  display: flex;
-  align-items: right;
   background-color: green;
-  flex-direction: column;
+  max-width: 400px;
+  list-style: none;
+  margin: 5px;
+  margin-left: 200px;
+  width: 300px;
+  min-width: 300px;
 }
 
 .otherMessages {
-  display: flex;
-  align-items: left;
   background-color: grey;
-  flex-direction: column;
+  max-width: 400px;
+  list-style: none;
+  margin: 5px;
+  margin-right: 200px;
 }
 
-.userMessages li {
-  display: inline-block;
+.allMessages {
+  display: flex;
+  flex-direction: column;
 }

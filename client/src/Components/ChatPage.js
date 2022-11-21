@@ -24,7 +24,8 @@ export default function ChatPage({ user }) {
       <h1>ChatPage</h1>
       <Message messages={messagesArr} />
       <form>
-        <textarea onChange={handleChange} />
+        <textarea className="textBox" onChange={handleChange} />
+        <br />
         <button onClick={handleSubmit}>Send</button>
       </form>
     </div>
