@@ -1,0 +1,17 @@
+.userMessages {
+  display: flex;
+  align-items: right;
+  background-color: green;
+  flex-direction: column;
+}
+
+.otherMessages {
+  display: flex;
+  align-items: left;
+  background-color: grey;
+  flex-direction: column;
+}
+
+.userMessages li {
+  display: inline-block;
+}

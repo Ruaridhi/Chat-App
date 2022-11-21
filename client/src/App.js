@@ -20,7 +20,7 @@ function App() {
   return (
     <UserContext.Provider value={user}>
       <div className="App">
-        <ChatPage />
+        <ChatPage user={user} />
         {!user ? <Login user={setUser} /> : null}
       </div>
     </UserContext.Provider>

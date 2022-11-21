@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../App';
+import './Message.css';
 
 export default function Message({ messages }) {
   let user = useContext(UserContext);
@@ -8,11 +9,21 @@ export default function Message({ messages }) {
 
   return (
     <div>
-      <ul>
-        {messages.map((message) => {
-          return `${user}: ${message}`;
-        })}
-      </ul>
+      {user ? (
+        <ul className="test">
+          {messages.map((message) => {
+            return (
+              <li
+                className={
+                  user === message.name ? 'userMessages' : 'otherMessages'
+                }
+              >
+                `${message.name}: ${message.message}`
+              </li>
+            );
+          })}
+        </ul>
+      ) : null}
     </div>
   );
 }
