@@ -2,25 +2,41 @@ import logo from './logo.svg';
 import './App.css';
 import ChatPage from './Components/ChatPage';
 import socketClient from 'socket.io-client';
-import { useState, createContext } from 'react';
+import { useState, createContext, useEffect } from 'react';
 import Login from './Components/Login';
 
-const SERVER = socketClient.connect('http://localhost:4000');
+const SERVER = 'http://localhost:4000';
 export const UserContext = createContext();
 
 function App() {
+  const socket = socketClient(SERVER);
+  const [socketMessages, setSocketMessages] = useState([]);
+
+  useEffect(() => {
+    socket.on('connection', () => {
+      console.log(`I'm connected with the back-end`);
+    });
+    socket.on('disconnect', () => {
+      console.log('I am disconnected');
+    });
+    socket.on('message', (messageObject) => {
+      console.log(messageObject, '&&&&&&');
+      setSocketMessages((current) => [...current, messageObject]);
+    });
+
+    return () => {
+      socket.off('connection');
+      socket.off('disconnect');
+      socket.off('message');
+    };
+  }, []);
+
   const [user, setUser] = useState('');
-
-  var socket = socketClient(SERVER);
-
-  socket.on('connection', () => {
-    console.log(`I'm connected with the back-end`);
-  });
 
   return (
     <UserContext.Provider value={user}>
       <div className="App">
-        <ChatPage user={user} />
+        <ChatPage user={user} socket={socket} messages={socketMessages} />
         {!user ? <Login user={setUser} /> : null}
       </div>
     </UserContext.Provider>

@@ -2,11 +2,8 @@ import React, { useState } from 'react';
 import Message from './Message';
 import './ChatPage.css';
 
-export default function ChatPage({ user }) {
+export default function ChatPage({ user, socket, messages }) {
   const [message, setMessage] = useState('');
-  const [messagesArr, setMessagesArr] = useState([
-    { name: 'Bob', message: 'Hi' },
-  ]);
 
   const handleChange = (event) => {
     console.log(event.target.value);
@@ -15,14 +12,19 @@ export default function ChatPage({ user }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let string = message;
-    setMessagesArr([...messagesArr, { name: user, message: message }]);
-    console.log(messagesArr);
+    //let string = message;
+    socket.emit('send-message', {
+      name: user,
+      message: message,
+      id: Date.now(),
+    });
+    //setMessagesArr([...messagesArr, { name: user, message: message }]);
+    console.log('emitting');
   };
   return (
     <div className="chatPage">
       <h1>ChatPage</h1>
-      <Message messages={messagesArr} />
+      <Message messages={messages} />
       <form>
         <textarea className="textBox" onChange={handleChange} />
         <br />
