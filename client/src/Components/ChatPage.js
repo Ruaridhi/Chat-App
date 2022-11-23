@@ -12,19 +12,17 @@ export default function ChatPage({ user, socket, messages }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //let string = message;
     socket.emit('send-message', {
       name: user,
       message: message,
       id: Date.now(),
     });
-    //setMessagesArr([...messagesArr, { name: user, message: message }]);
     console.log('emitting');
   };
   return (
     <div className="chatPage">
       <h1>ChatPage</h1>
-      <Message messages={messages} />
+      <Message messages={messages} socket={socket} />
       <form>
         <textarea className="textBox" onChange={handleChange} />
         <br />

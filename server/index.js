@@ -4,23 +4,9 @@ const http = require('http');
 const cors = require('cors');
 const { Server } = require('socket.io');
 
-app.use(cors()); // Add cors middleware
+app.use(cors());
 
 const server = http.createServer(app);
-var STATIC_CHANNELS = [
-  {
-    name: 'Kodify chat',
-    participants: 0,
-    id: 1,
-    sockets: [],
-  },
-];
-
-app.get('/', (req, res) => {
-  res.json({
-    channels: STATIC_CHANNELS,
-  });
-});
 
 server.listen(4000, () => 'Server is running on port 4000');
 
@@ -41,11 +27,8 @@ io.on('connection', (socket) => {
     console.log('SENDING MESSAGE');
     io.emit('message', message);
   });
-});
 
-// app.post('/', (req, res) => {
-//   console.log('test');
-//   res.json({
-//     channels: STATIC_CHANNELS,
-//   });
-// });
+  socket.on('delete-last', () => {
+    io.emit('delete');
+  });
+});

@@ -7,27 +7,35 @@ export default function Message({ messages }) {
 
   return (
     <div>
-      {user ? (
-        <ul className="allMessages">
-          {messages ? (
-            messages.map((message) => {
-              return (
-                <li
-                  className={
-                    user === message.name ? 'userMessages' : 'otherMessages'
+      {
+        <ul id="messages" className="allMessages">
+          {messages.map((message) => {
+            let text = '';
+            if (message.message.startsWith('/think')) {
+              text = message.message.substring(7);
+            } else {
+              text = message.message;
+            }
+
+            return (
+              <li
+                id="messages"
+                className={
+                  user === message.name ? 'userMessages' : 'otherMessages'
+                }
+              >
+                <p
+                  style={
+                    message.message.startsWith('/think')
+                      ? { color: 'grey' }
+                      : { color: 'black' }
                   }
-                >
-                  `${message.name}: ${message.message}`
-                </li>
-              );
-            })
-          ) : (
-            <h1>No messages yet</h1>
-          )}
+                >{`${text}`}</p>
+              </li>
+            );
+          })}
         </ul>
-      ) : (
-        <h1>Please log in</h1>
-      )}
+      }
     </div>
   );
 }

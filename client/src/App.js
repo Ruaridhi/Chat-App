@@ -11,6 +11,7 @@ export const UserContext = createContext();
 function App() {
   const socket = socketClient(SERVER);
   const [socketMessages, setSocketMessages] = useState([]);
+  const [user, setUser] = useState('');
 
   useEffect(() => {
     socket.on('connection', () => {
@@ -31,13 +32,14 @@ function App() {
     };
   }, []);
 
-  const [user, setUser] = useState('');
-
   return (
     <UserContext.Provider value={user}>
       <div className="App">
-        <ChatPage user={user} socket={socket} messages={socketMessages} />
-        {!user ? <Login user={setUser} /> : null}
+        {!user ? (
+          <Login user={setUser} />
+        ) : (
+          <ChatPage user={user} socket={socket} messages={socketMessages} />
+        )}
       </div>
     </UserContext.Provider>
   );

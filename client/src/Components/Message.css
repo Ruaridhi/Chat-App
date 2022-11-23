@@ -1,16 +1,12 @@
 .userMessages {
   background-color: green;
-  max-width: 400px;
   list-style: none;
   margin: 5px;
   margin-left: 200px;
-  width: 300px;
-  min-width: 300px;
 }
 
 .otherMessages {
   background-color: grey;
-  max-width: 400px;
   list-style: none;
   margin: 5px;
   margin-right: 200px;
@@ -19,4 +15,13 @@
 .allMessages {
   display: flex;
   flex-direction: column;
+}
+
+#messages {
+  max-width: 400px;
+  min-width: 400px;
+}
+
+p {
+  word-wrap: break-word;
 }
